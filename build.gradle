@@ -7,11 +7,19 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath 'com.h2database:h2:1.4.197'
 	}
 }
 
+plugins {
+    id "org.flywaydb.flyway" version "6.1.2"
+}
+flyway {
+    url = 'jdbc:h2:mem:mydb'
+    user = 'myUsr'
+}
+
 apply plugin: 'java'
-apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
 group = 'io.pivotal.pal.flyway'
@@ -27,11 +35,13 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-jdbc:1.5.10.RELEASE')
 	compile('org.springframework.boot:spring-boot-starter-web:1.5.10.RELEASE')
 	compile('org.springframework.boot:spring-boot-starter-actuator:1.5.10.RELEASE')
-	compile('mysql:mysql-connector-java:6.0.6')
-	compile('org.flywaydb:flyway-core:5.0.7')
+	compile('mysql:mysql-connector-java:8.0.18')
+	compile('org.flywaydb:flyway-core:5.2.4')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('com.h2database:h2')
 }
+
+bootRun.dependsOn rootProject.tasks['flywayMigrate']
 
 clean.doLast() {
     file("./out").deleteDir()
