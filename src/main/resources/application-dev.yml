@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: flyway-migration-task
+  datasource:
+    url: jdbc:mysql://us-cdbr-iron-east-05.cleardb.net:3306/ad_6f629b330bfe2b9?user=b6b80442e5325d&useSSL=false&useTimezone=true&serverTimezone=UTC&useLegacyDatetimeCode=false&password=e095664e
+
+flyway:
+  enabled: true
+  validate-on-migrate: true
+  baseline-on-migrate: true
+
+migrate:
+  task: false
+  command: stage # stage, migrate
+
+endpoints:
+  actuator:
+    enabled: true
+  flyway:
+    enabled: true
+
+management:
+  security:
+    enabled: false

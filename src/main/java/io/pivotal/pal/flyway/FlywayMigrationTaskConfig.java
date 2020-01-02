@@ -2,6 +2,7 @@ package io.pivotal.pal.flyway;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.task.configuration.EnableTask;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnProperty("migrate.task")
 public class FlywayMigrationTaskConfig {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+//	@Autowired
 
 	@Bean
 	public CommandLineRunner runner() {

@@ -14,9 +14,18 @@ buildscript {
 plugins {
     id "org.flywaydb.flyway" version "6.1.2"
 }
+//local
+// flyway {
+//     url = 'jdbc:h2:mem:mydb'
+//     user = 'myUsr'
+// }
+//PCF
 flyway {
-    url = 'jdbc:h2:mem:mydb'
-    user = 'myUsr'
+    url = 'jdbc:mysql://us-cdbr-iron-east-05.cleardb.net:3306/ad_58f5373af64f279'
+    driver = 'com.mysql.cj.jdbc.Driver'
+    user = 'ba25a4922c02f3'
+    password = '2f797465'
+	baselineOnMigrate=true
 }
 
 apply plugin: 'java'
@@ -41,7 +50,7 @@ dependencies {
 	testCompile('com.h2database:h2')
 }
 
-bootRun.dependsOn rootProject.tasks['flywayMigrate']
+//bootRun.dependsOn rootProject.tasks['flywayMigrate']
 
 clean.doLast() {
     file("./out").deleteDir()
